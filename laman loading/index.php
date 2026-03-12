@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Argo Store - Top Up Game</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -15,7 +16,7 @@
 <section class="game-container">
 
 <div class="game-card">
-<img src="img/ml.jpg">
+<img src="img/ml.jpg" alt="Moblie Legend">
 <h2>Mobile Legends</h2>
 <p>Top Up Diamond ML Murah</p>
 <a href="ml.php">
@@ -24,7 +25,7 @@
 </div>
 
 <div class="game-card">
-<img src="img/pubg.jpg">
+<img src="img/pubg.jpg" alt="PlayerUnknown's Battlegrounds">
 <h2>PUBG Mobile</h2>
 <p>Top Up UC PUBG</p>
 <a href="pubg.php">
@@ -33,7 +34,7 @@
 </div>
 
 <div class="game-card">
-<img src="img/ff.jpg">
+<img src="img/ff.jpg" alt="Free Fire">
 <h2>Free Fire</h2>
 <p>Top Up Diamond Free Fire</p>
 <a href="ff.php">
@@ -43,5 +44,9 @@
 
 </section>
 
+<footer>
+<p>© 2026 Argo Store</p>
+<p>Top Up Game Murah & Aman</p>
+</footer>
 </body>
 </html>
