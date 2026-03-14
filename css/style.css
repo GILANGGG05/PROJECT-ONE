@@ -1,10 +1,97 @@
 body{
-font-family:Arial;
-background:#0f172a;
-color:white;
+font-family: Arial;
 margin:0;
+background:#111;
+color:white;
 }
 
+/* NAVBAR */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:black;
+padding:15px;
+}
+
+.navbar ul{
+display:flex;
+list-style:none;
+gap:20px;
+}
+
+.navbar a{
+color:white;
+text-decoration:none;
+}
+
+/* GAME */
+
+.game-container{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+padding:30px;
+}
+
+.game-card{
+background:#1c1c1c;
+padding:20px;
+border-radius:10px;
+text-align:center;
+width:200px;
+}
+
+.game-card img{
+width:100%;
+border-radius:10px;
+}
+
+button{
+background:#00c853;
+border:none;
+padding:10px 15px;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+
+/* ABOUT */
+
+.about{
+padding:40px;
+text-align:center;
+}
+
+/* PAYMENT */
+
+.payment{
+text-align:center;
+padding:40px;
+}
+
+.payment-list img{
+width:80px;
+margin:10px;
+}
+
+/* FOOTER */
+
+footer{
+background:black;
+padding:20px;
+text-align:center;
+}
+
+/* WHATSAPP FLOAT */
+
+.wa-float{
+position:fixed;
+bottom:20px;
+right:20px;
+}
 header{
 text-align:center;
 padding:30px;
