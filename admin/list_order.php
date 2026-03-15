@@ -1,30 +1,25 @@
 <?php
-include '../koneksi.php';
 
-$result = mysqli_query($conn, "SELECT * FROM orders ORDER BY created_at DESC");
+include "../koneksi.php";
 
-echo "<h2>Daftar Order</h2>";
-echo "<table border='1' cellpadding='5' cellspacing='0'>";
-echo "<tr>
-        <th>ID</th>
-        <th>Game</th>
-        <th>User ID</th>
-        <th>Server</th>
-        <th>Diamond</th>
-        <th>Pembayaran</th>
-        <th>Waktu</th>
-      </tr>";
+$order_id = "ORD".time();
 
-while ($row = mysqli_fetch_assoc($result)) {
-    echo "<tr>
-            <td>{$row['id']}</td>
-            <td>{$row['game']}</td>
-            <td>{$row['user_id']}</td>
-            <td>{$row['server']}</td>
-            <td>{$row['diamond']}</td>
-            <td>{$row['payment']}</td>
-            <td>{$row['created_at']}</td>
-          </tr>";
-}
-echo "</table>";
+$game = "Mobile Legends";
+$user_id = $_POST['userid'];
+$server = $_POST['server'];
+$diamond = $_POST['diamond'];
+$payment = $_POST['payment'];
+$price = $_POST['price'];
+$wa = $_POST['wa'];
+
+$status = "Pending";
+
+mysqli_query($conn,"INSERT INTO orders
+(order_id,game,user_id,server_id,diamond,payment,price,whatsapp,status)
+VALUES
+('$order_id','$game','$user_id','$server','$diamond','$payment','$price','$wa','$status')
+");
+
+echo $order_id;
+
 ?>

@@ -10,7 +10,7 @@
 
 <!-- NAVBAR -->
 <nav class="navbar">
-<h2>ARGO STORE</h2>
+<h2>FURY PROJECT</h2>
 
 <ul>
 <li><a href="index.html">Beranda</a></li>
@@ -30,30 +30,66 @@
 
 <section class="game-container">
 
-<div class="game-card">
+<div class="game-grid">
+
+<a href="pages/ml.php" class="game-item">
 <img src="img/ml.jpg">
-<h2>Mobile Legends</h2>
-<p>Top Up Diamond ML Murah</p>
-<a href="pages/ml.php">
-<button>Beli Sekarang</button>
+<div class="game-name">Mobile Legends</div>
 </a>
-</div>
 
-<div class="game-card">
-<img src="img/pubg.jpg">
-<h2>PUBG Mobile</h2>
-<p>Top Up UC PUBG</p>
-<a href="pages/pubg.php">
-<button>Beli Sekarang</button>
+<a href="pages/magicchess.php" class="game-item">
+<img src="img/magicchess.jpg">
+<div class="game-name">Magic Chess</div>
 </a>
-</div>
 
-<div class="game-card">
+<a href="pages/arena.php" class="game-item">
+<img src="img/arena.jpg">
+<div class="game-name">Arena Breakout</div>
+</a>
+
+<a href="pages/ff.php" class="game-item">
 <img src="img/ff.jpg">
-<h2>Free Fire</h2>
-<p>Top Up Diamond Free Fire</p>
-<a href="pages/ff.php">
-<button>Beli Sekarang</button>
+<div class="game-name">Free Fire</div>
+</a>
+
+<a href="pages/ffmax.php" class="game-item">
+<img src="img/ffmax.jpg">
+<div class="game-name">Free Fire Max</div>
+</a>
+
+<a href="pages/pubg.php" class="game-item">
+<img src="img/pubg.jpg">
+<div class="game-name">PUBG Mobile</div>
+</a>
+
+<a href="pages/hok.php" class="game-item">
+<img src="img/hok.jpg">
+<div class="game-name">Honor Of Kings</div>
+</a>
+
+<a href="pages/valorant.php" class="game-item">
+<img src="img/valorant.jpg">
+<div class="game-name">Valorant</div>
+</a>
+
+<a href="pages/genshin.php" class="game-item">
+<img src="img/genshin.jpg">
+<div class="game-name">Genshin Impact</div>
+</a>
+
+<a href="pages/codm.php" class="game-item">
+<img src="img/codm.jpg">
+<div class="game-name">COD Mobile</div>
+</a>
+
+<a href="pages/starrail.php" class="game-item">
+<img src="img/starrail.jpg">
+<div class="game-name">Honkai Star Rail</div>
+</a>
+
+<a href="pages/undawn.php" class="game-item">
+<img src="img/undawn.jpg">
+<div class="game-name">Undawn</div>
 </a>
 </div>
 
