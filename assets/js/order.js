@@ -125,19 +125,40 @@ function confirmOrder(){
             "&total="+encodeURIComponent(total)+
             "&wa="+encodeURIComponent(wa)
     })
-    .then(res => res.text())
+    .then(res => res.text())  // <=== INI YANG DITAMBAH! (UBAH RESPONSE JADI TEXT)
     .then(res => {
         console.log("Response:", res);
+        
         if(res.trim() == "success"){
             alert("Pesanan berhasil disimpan!");
             closeModal();
-
-            // Tampilkan QRIS
-            let qrisDiv = document.getElementById("qrisArea");
-            if(qrisDiv){
-                qrisDiv.innerHTML = '<h3>Scan QRIS untuk pembayaran:</h3><img src="../assets/img/qris.png" style="width:250px; border-radius:10px;">';
+            
+            // AMBIL DATA
+            let game = document.querySelector(".summary-item span:last-child")?.innerText || 'Game';
+            let diamond = document.getElementById("sumDiamond")?.innerText || '-';
+            let payment = document.getElementById("sumPay")?.innerText || '-';
+            let total = document.getElementById("sumPrice")?.innerText || '-';
+            let wa = document.getElementById("wa")?.value || '-';
+            
+            // DEBUG: CEK DATA
+            console.log("Data untuk QRIS:", {game, diamond, payment, total, wa});
+            
+            // BUAT URL QRIS
+            let qrisUrl = `qris.php?game=${encodeURIComponent(game)}&diamond=${encodeURIComponent(diamond)}&payment=${encodeURIComponent(payment)}&total=${encodeURIComponent(total)}&wa=${encodeURIComponent(wa)}`;
+            console.log("Membuka URL:", qrisUrl);
+            
+            // BUKA QRIS DI TAB BARU
+            let qrisWindow = window.open('', '_blank');
+            if (qrisWindow) {
+                qrisWindow.location.href = qrisUrl;
+                console.log("Tab baru berhasil dibuka");
+            } else {
+                console.log("Pop-up diblokir, redirect manual");
+                if (confirm("Pop-up terblokir! Buka halaman QRIS di tab ini?")) {
+                    window.location.href = qrisUrl;
+                }
             }
-
+            
         } else {
             alert("Error: " + res);
         }
