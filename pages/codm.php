@@ -91,7 +91,7 @@
 
 <div class="summary-item">
 <span>Game</span>
-<span>Mobile Legends</span>
+<span>Call of Duty: Mobile</span>
 </div>
 
 <div class="summary-item">
