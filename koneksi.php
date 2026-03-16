@@ -1,6 +1,6 @@
 <?php
-$conn = mysqli_connect("localhost","admin","123456","PROJECT_ONE");
-
+$conn = mysqli_connect("localhost","root","","PROJECT_ONE");
+mysqli_set_charset($conn, "utf8mb4");
 if(!$conn){
     die("Koneksi gagal: ".mysqli_connect_error());
 }

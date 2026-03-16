@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Argo Store - Top Up Game</title>
+<title>FURRY PROJECT - Top Up Game</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
@@ -33,62 +33,62 @@
 <div class="game-grid">
 
 <a href="pages/ml.php" class="game-item">
-<img src="img/ml.jpg">
+<img src="assets/img/ml.jpg">
 <div class="game-name">Mobile Legends</div>
 </a>
 
 <a href="pages/magicchess.php" class="game-item">
-<img src="img/magicchess.jpg">
+<img src="assets/img/magicchess.jpg">
 <div class="game-name">Magic Chess</div>
 </a>
 
 <a href="pages/arena.php" class="game-item">
-<img src="img/arena.jpg">
+<img src="assets/img/arena.jpg">
 <div class="game-name">Arena Breakout</div>
 </a>
 
 <a href="pages/ff.php" class="game-item">
-<img src="img/ff.jpg">
+<img src="assets/img/ff.jpg">
 <div class="game-name">Free Fire</div>
 </a>
 
 <a href="pages/ffmax.php" class="game-item">
-<img src="img/ffmax.jpg">
+<img src="assets/img/ffmax.jpg">
 <div class="game-name">Free Fire Max</div>
 </a>
 
 <a href="pages/pubg.php" class="game-item">
-<img src="img/pubg.jpg">
+<img src="assets/img/pubg.jpg">
 <div class="game-name">PUBG Mobile</div>
 </a>
 
 <a href="pages/hok.php" class="game-item">
-<img src="img/hok.jpg">
+<img src="assets/img/hok.jpg">
 <div class="game-name">Honor Of Kings</div>
 </a>
 
 <a href="pages/valorant.php" class="game-item">
-<img src="img/valorant.jpg">
+<img src="assets/img/valorant.jpg">
 <div class="game-name">Valorant</div>
 </a>
 
 <a href="pages/genshin.php" class="game-item">
-<img src="img/genshin.jpg">
+<img src="assets/img/genshin.jpg">
 <div class="game-name">Genshin Impact</div>
 </a>
 
 <a href="pages/codm.php" class="game-item">
-<img src="img/codm.jpg">
+<img src="assets/img/codm.jpg">
 <div class="game-name">COD Mobile</div>
 </a>
 
 <a href="pages/starrail.php" class="game-item">
-<img src="img/starrail.jpg">
+<img src="assets/img/starrail.jpg">
 <div class="game-name">Honkai Star Rail</div>
 </a>
 
 <a href="pages/undawn.php" class="game-item">
-<img src="img/undawn.jpg">
+<img src="assets/img/undawn.jpg">
 <div class="game-name">Undawn</div>
 </a>
 </div>
@@ -125,10 +125,10 @@ Proses top up hanya membutuhkan waktu 1-3 menit setelah pembayaran.
 
 <div class="payment-list">
 
-<img src="img/qris.png">
-<img src="img/dana.png">
-<img src="img/ovo.png">
-<img src="img/bca.png">
+<img src="asset/img/qris.png">
+<img src="assets/img/dana.png">
+<img src="assets/img/ovo.png">
+<img src="assets/img/bca.png">
 
 </div>
 
@@ -149,10 +149,10 @@ Proses top up hanya membutuhkan waktu 1-3 menit setelah pembayaran.
 <!-- WHATSAPP FLOATING -->
 <a href="https://wa.me/6281234567890" class="wa-float">
 
-<img src="img/wa.png" width="50">
+<img src="assets/img/wa.png" width="50">
 
 </a>
 
-
+<script src="assets/js/order.js"></script>
 </body>
 </html>
