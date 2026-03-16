@@ -1,65 +1,123 @@
--- phpMyAdmin SQL Dump
--- version 5.2.3-1.fc43
--- https://www.phpmyadmin.net/
---
--- Host: localhost
--- Generation Time: Mar 15, 2026 at 02:36 PM
--- Server version: 10.11.16-MariaDB
--- PHP Version: 8.4.18
+-- =====================================================
+-- DATABASE: project_one_db (atau ganti sesuai keinginan)
+-- STRUKTUR TABLE orders DENGAN KOLOM GAME
+-- =====================================================
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+-- Buat database (comment baris ini jika sudah buat manual)
+-- CREATE DATABASE IF NOT EXISTS project_one_db;
+-- USE project_one_db;
 
+-- =====================================================
+-- TABLE: migrations (untuk log migration)
+-- =====================================================
+CREATE TABLE IF NOT EXISTS migrations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    migration_name VARCHAR(255) NOT NULL,
+    run_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+-- =====================================================
+-- TABLE: users (asumsi karena ada user_id di orders)
+-- =====================================================
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
---
--- Database: `PROJECT_ONE`
---
+-- =====================================================
+-- TABLE: servers (asumsi karena ada server_id di orders)
+-- =====================================================
+CREATE TABLE IF NOT EXISTS servers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    server_name VARCHAR(100) NOT NULL,
+    server_ip VARCHAR(50),
+    status ENUM('active', 'inactive') DEFAULT 'active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
--- --------------------------------------------------------
+-- =====================================================
+-- TABLE: orders (YANG UTAMA DENGAN KOLOM GAME)
+-- =====================================================
+CREATE TABLE IF NOT EXISTS orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    server_id INT NOT NULL,
+    game VARCHAR(100) NOT NULL,           -- KOLOM GAME YANG BARU DITAMBAH
+    nickname VARCHAR(100) NOT NULL,
+    diamond INT NOT NULL,
+    payment VARCHAR(50) NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    wa VARCHAR(20) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    -- Foreign keys (optional, bisa diaktifkan kalau perlu)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (server_id) REFERENCES servers(id) ON DELETE CASCADE
+);
 
---
--- Table structure for table `orders`
---
+-- =====================================================
+-- INSERT DATA MIGRATION (log bahwa migration sudah jalan)
+-- =====================================================
+INSERT INTO migrations (migration_name) VALUES 
+('create_users_table'),
+('create_servers_table'), 
+('create_orders_table'),
+('add_game_to_orders');
 
-CREATE TABLE `orders` (
-  `id` int(11) NOT NULL,
-  `user_id` varchar(50) DEFAULT NULL,
-  `server_id` varchar(50) DEFAULT NULL,
-  `nickname` varchar(50) DEFAULT NULL,
-  `diamond` varchar(20) DEFAULT NULL,
-  `payment` varchar(20) DEFAULT NULL,
-  `total` varchar(20) DEFAULT NULL,
-  `wa` varchar(20) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+-- =====================================================
+-- INSERT DATA DUMMY (untuk testing)
+-- =====================================================
 
---
--- Indexes for dumped tables
---
+-- Data dummy users
+INSERT INTO users (username, email, password) VALUES
+('john_doe', 'john@example.com', MD5('password123')),
+('jane_smith', 'jane@example.com', MD5('password123')),
+('budi', 'budi@example.com', MD5('password123'));
 
---
--- Indexes for table `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`);
+-- Data dummy servers
+INSERT INTO servers (server_name, server_ip, status) VALUES
+('Server A - Jakarta', '192.168.1.10', 'active'),
+('Server B - Surabaya', '192.168.1.11', 'active'),
+('Server C - Bandung', '192.168.1.12', 'inactive');
 
---
--- AUTO_INCREMENT for dumped tables
---
+-- Data dummy orders (dengan kolom GAME)
+INSERT INTO orders (user_id, server_id, game, nickname, diamond, payment, total, wa) VALUES
+(1, 1, 'Mobile Legends', 'JohnGamer', 500, 'DANA', 100000, '081234567890', NOW()),
+(1, 2, 'Free Fire', 'JohnFF', 1000, 'OVO', 200000, '081234567890', NOW()),
+(2, 1, 'PUBG Mobile', 'JanePUBG', 600, 'GoPay', 150000, '081298765432', NOW()),
+(2, 3, 'Mobile Legends', 'JaneML', 300, 'DANA', 60000, '081298765432', NOW()),
+(3, 2, 'Free Fire', 'BudiFF', 1000, 'Bank Transfer', 200000, '081234598765', NOW());
 
---
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-COMMIT;
+-- =====================================================
+-- VIEW (opsional) untuk memudahkan lihat data
+-- =====================================================
+CREATE VIEW v_orders_detail AS
+SELECT 
+    o.id,
+    u.username AS pembeli,
+    s.server_name AS server,
+    o.game,
+    o.nickname,
+    o.diamond,
+    o.payment,
+    o.total,
+    o.wa,
+    o.created_at
+FROM orders o
+JOIN users u ON o.user_id = u.id
+JOIN servers s ON o.server_id = s.id;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- =====================================================
+-- TAMBAHKAN INDEX untuk performa
+-- =====================================================
+CREATE INDEX idx_user_id ON orders(user_id);
+CREATE INDEX idx_server_id ON orders(server_id);
+CREATE INDEX idx_game ON orders(game);
+CREATE INDEX idx_created_at ON orders(created_at);
+
+-- =====================================================
+-- SELESAI
+-- =====================================================
