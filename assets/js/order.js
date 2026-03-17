@@ -125,33 +125,39 @@ function confirmOrder(){
             "&total="+encodeURIComponent(total)+
             "&wa="+encodeURIComponent(wa)
     })
-    .then(res => res.text())  // <=== INI YANG DITAMBAH! (UBAH RESPONSE JADI TEXT)
+    .then(res => res.text())
     .then(res => {
         console.log("Response:", res);
         
-        if(res.trim() == "success"){
-            alert("Pesanan berhasil disimpan!");
-            closeModal();
+        // ====== TAMBAHKAN INI ====== <===
+        let cleanRes = res.trim();        // <=== TAMBAHAN
+        let parts = cleanRes.split('|');  // <=== TAMBAHAN
+        // ====== SAMPAI SINI ======
+        
+        if(parts[0] == "success"){
+            let orderId = parts[1];  // AMBIL ORDER ID
             
-            // AMBIL DATA
+            alert("✅ Pesanan berhasil! Order ID: " + orderId);
+                closeModal();
+            
+            // AMBIL DATA UNTUK QRIS
             let game = document.querySelector(".summary-item span:last-child")?.innerText || 'Game';
             let diamond = document.getElementById("sumDiamond")?.innerText || '-';
             let payment = document.getElementById("sumPay")?.innerText || '-';
             let total = document.getElementById("sumPrice")?.innerText || '-';
             let wa = document.getElementById("wa")?.value || '-';
             
-            // DEBUG: CEK DATA
             console.log("Data untuk QRIS:", {game, diamond, payment, total, wa});
             
-            // BUAT URL QRIS
-            let qrisUrl = `qris.php?game=${encodeURIComponent(game)}&diamond=${encodeURIComponent(diamond)}&payment=${encodeURIComponent(payment)}&total=${encodeURIComponent(total)}&wa=${encodeURIComponent(wa)}`;
+            // BUAT URL QRIS DENGAN ORDER ID
+            let qrisUrl = `qris.php?game=${encodeURIComponent(game)}&diamond=${encodeURIComponent(diamond)}&payment=${encodeURIComponent(payment)}&total=${encodeURIComponent(total)}&wa=${encodeURIComponent(wa)}&order_id=${orderId}`;
             console.log("Membuka URL:", qrisUrl);
             
             // BUKA QRIS DI TAB BARU
             let qrisWindow = window.open('', '_blank');
             if (qrisWindow) {
                 qrisWindow.location.href = qrisUrl;
-                console.log("Tab baru berhasil dibuka");
+                console.log("Tab baru berhasil dibuka dengan Order ID:", orderId);
             } else {
                 console.log("Pop-up diblokir, redirect manual");
                 if (confirm("Pop-up terblokir! Buka halaman QRIS di tab ini?")) {
@@ -160,7 +166,7 @@ function confirmOrder(){
             }
             
         } else {
-            alert("Error: " + res);
+            alert("Error: " + (parts[1] || res));
         }
     })
     .catch(err => {

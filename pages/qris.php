@@ -1,5 +1,6 @@
 <?php
 // pages/qris.php
+$order_id = $_GET['order_id'] ?? '-';
 $game = $_GET['game'] ?? 'Game';
 $diamond = $_GET['diamond'] ?? '-';
 $payment = $_GET['payment'] ?? '-';
@@ -10,7 +11,7 @@ $wa = $_GET['wa'] ?? '-';
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pembayaran QRIS</title>
+    <title>Pembayaran QRIS - FURY PROJECT</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         .qris-container {
@@ -21,6 +22,18 @@ $wa = $_GET['wa'] ?? '-';
             border-radius: 12px;
             text-align: center;
             box-shadow: 0 0 20px rgba(0,234,255,0.3);
+        }
+        .order-id {
+            background: #020617;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ffaa00;
+        }
+        .order-id h3 {
+            color: #ffaa00;
+            font-size: 24px;
+            margin: 0;
         }
         .order-detail {
             background: #020617;
@@ -33,6 +46,9 @@ $wa = $_GET['wa'] ?? '-';
             margin: 8px 0;
             color: #ddd;
         }
+        .qris-image {
+            margin: 20px 0;
+        }
         .qris-image img {
             width: 250px;
             border-radius: 10px;
@@ -43,6 +59,9 @@ $wa = $_GET['wa'] ?? '-';
             font-size: 14px;
             margin-top: 20px;
             text-align: left;
+            background: #0a0f1f;
+            padding: 20px;
+            border-radius: 8px;
         }
         .btn {
             background: #00eaff;
@@ -52,12 +71,24 @@ $wa = $_GET['wa'] ?? '-';
             cursor: pointer;
             font-weight: bold;
             margin-top: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-close {
+            background: #333;
+            color: white;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="qris-container">
+            
+            <div class="order-id">
+                <h3>🔖 ORDER ID: #<?= $order_id ?></h3>
+                <p style="color: #bbb; font-size: 12px;">Simpan nomor ini untuk cek status</p>
+            </div>
+            
             <h1 style="color: #00eaff;">Scan QRIS</h1>
             
             <div class="order-detail">
@@ -73,7 +104,7 @@ $wa = $_GET['wa'] ?? '-';
             </div>
             
             <div class="instructions">
-                <h4>Cara Pembayaran:</h4>
+                <h4 style="color: #00eaff;">📌 Cara Pembayaran:</h4>
                 <ol style="margin-left: 20px;">
                     <li>Screenshot QRIS ini</li>
                     <li>Buka aplikasi DANA/OVO/GoPay</li>
@@ -81,10 +112,19 @@ $wa = $_GET['wa'] ?? '-';
                     <li>Upload screenshot atau scan langsung</li>
                     <li>Selesaikan pembayaran</li>
                 </ol>
+                
+                <div style="background: #020617; padding: 10px; border-radius: 8px; margin-top: 15px;">
+                    <p style="color: #ffaa00;">⚠️ Simpan Order ID #<?= $order_id ?> untuk cek status</p>
+                </div>
             </div>
             
-            <button class="btn" onclick="window.print()">Cetak / Simpan</button>
-            <button class="btn" onclick="window.location.href='ml.php'" style="background: #333;">Kembali</button>
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+                <button class="btn btn-close" onclick="window.close()">Tutup</button>
+                <button class="btn" onclick="window.location.href='track-order.php?order_id=<?= $order_id ?>'">
+                    Cek Status
+                </button>
+            </div>
+            
         </div>
     </div>
 </body>

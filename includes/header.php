@@ -1,6 +1,4 @@
 <?php
-// includes/header.php
-session_start();
 $base_url = '/PROJECT-ONE';
 ?>
 <!DOCTYPE html>

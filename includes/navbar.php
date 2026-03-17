@@ -1,7 +1,8 @@
 <?php
-// includes/navbar.php
+// session_start();   // HAPUS INI! (session sudah di header.php)
 $base_url = '/PROJECT-ONE';
 ?>
+
 <nav class="navbar">
     <div class="nav-container">
         <div class="nav-logo">
@@ -13,6 +14,7 @@ $base_url = '/PROJECT-ONE';
         
         <ul class="nav-menu">
             <li><a href="<?= $base_url ?>/index.php">Home</a></li>
+            <li><a href="<?= $base_url ?>/pages/track-order.php">Cek Pesanan</a></li> 
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle">Games ▼</a>
                 <ul class="dropdown-menu">
@@ -31,8 +33,14 @@ $base_url = '/PROJECT-ONE';
         </ul>
         
         <div class="nav-auth">
-            <a href="<?= $base_url ?>/pages/login.php" class="btn-login">Login</a>
-            <a href="<?= $base_url ?>/pages/register.php" class="btn-register">Register</a>
+            <?php if(isset($_SESSION['login'])): ?>
+                <span style="color: #00eaff;">Halo, <?= $_SESSION['username'] ?></span>
+                <a href="<?= $base_url ?>/pages/user/dashboard.php" class="btn-login">Dashboard</a>
+                <a href="<?= $base_url ?>/process/logout.php" class="btn-register">Logout</a>
+            <?php else: ?>
+                <a href="<?= $base_url ?>/pages/auth/login.php" class="btn-login">Login</a>
+                <a href="<?= $base_url ?>/pages/auth/register.php" class="btn-register">Register</a>
+            <?php endif; ?>
         </div>
         
         <div class="nav-toggle" onclick="toggleMenu()">☰</div>
